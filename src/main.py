@@ -8,7 +8,7 @@ models.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 
-@app.post("/disk/create", response_model=schemas.Disk)
+@app.post("/disk/attach", response_model=schemas.Disk)
 def create_disk(disk: schemas.DiskCreate, db: Session = Depends(get_db)):
     return crud.create_disk(db=db, disk=disk)
 
@@ -29,14 +29,14 @@ def read_disk_by_name(disk_name: str, db: Session = Depends(get_db)):
     return db_disk
 
 
-@app.get("/disk/delete/id/{disk_id}")
+@app.get("/disk/detach/id/{disk_id}")
 def delete_disk_by_id(disk_id: int, db: Session = Depends(get_db)):
     affected_rows = crud.delete_disk_by_id(db, disk_id=disk_id)
     if affected_rows != 1:
         raise HTTPException(status_code=404, detail="Delete Disk error")
 
 
-@app.get("/disk/delete/name/{disk_name}")
+@app.get("/disk/detach/name/{disk_name}")
 def delete_disk_by_name(disk_name: str, db: Session = Depends(get_db)):
     affected_rows = crud.delete_disk_by_name(db, disk_name=disk_name)
     if affected_rows != 1:
