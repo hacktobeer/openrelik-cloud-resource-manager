@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "openrelik-cloud-resource-manager"
+version = "2024.10.07"
+description = "OpenRelik Cloud Resource Manager"
+authors = ["Ramses de Beer <ramsesdebeer@gmail.com>"]
+license = "Apache 2.0"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.27.1"
+SQLAlchemy = "^2.0.27"
+fastapi = {extras = ["standard"], version="^0.115.0"}
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.1.0"
+pytest = "^8.0.2"
+black = "^24.2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
